@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
 using backend.database;
 using backend.Repositories;
@@ -108,6 +109,7 @@ public class Program
         {
             builder.Services.Configure<ForwardedHeadersOptions>(o =>
             {
+                o.KnownProxies.Add(IPAddress.Parse("172.18.0.1"));
                 o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
         }
