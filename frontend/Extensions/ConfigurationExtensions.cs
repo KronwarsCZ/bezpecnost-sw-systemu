@@ -4,7 +4,7 @@ namespace frontend.Extensions;
 
 public static class ConfigurationExtensions
 {
-    public static string GetConnectionString(this IConfiguration configuration)
+    public static string GetDbConnectionString(this IConfiguration configuration)
     {
         var connectionStringBuilder = new NpgsqlConnectionStringBuilder
         {

@@ -79,16 +79,26 @@ public class Program
         // Connect DB
         if (builder.Environment.IsDevelopment())
         {
-            Log.Information("Using local DB");
-            builder.Services.AddDbContext<AppDbContext>(o =>
-                o.UseInMemoryDatabase("local_db_Constant")
-            );
+            if (Environment.GetEnvironmentVariable("USE_POSTGRES_DB") == "true")
+            {
+                Log.Information("Using local PostgreSQL DB");
+                builder.Services.AddDbContext<AppDbContext>(o =>
+                    o.UseNpgsql(builder.Configuration.GetDbConnectionString())
+                );
+            }
+            else
+            {
+                Log.Information("Using local in-memory DB");
+                builder.Services.AddDbContext<AppDbContext>(o =>
+                    o.UseInMemoryDatabase("local_db_Constant")
+                );
+            }
         }
         else
         {
             Log.Information("Using prod DB");
             builder.Services.AddDbContext<AppDbContext>(o =>
-                o.UseNpgsql(builder.Configuration.GetConnectionString("local_db"))
+                o.UseNpgsql(builder.Configuration.GetDbConnectionString())
             );
         }
         
