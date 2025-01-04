@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using frontend.Components;
 using frontend.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -133,8 +134,22 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        
+        // Set up custom content types - associating file extension to MIME type
+        var provider = new FileExtensionContentTypeProvider
+        {
+            Mappings =
+            {
+                [".css"] = "text/css",
+                [".js"] = "text/javascript"
+            }
+        };
 
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            ContentTypeProvider = provider
+        });
+        
         app.UseRouting();
         app.UseAntiforgery();
         app.MapControllers();
