@@ -1,6 +1,33 @@
 ﻿services:
   frontend:
     image: frontend
+    restart: on-failure
     build:
       context: .
       dockerfile: frontend/Dockerfile
+    ports:
+      - "5203:5203"
+    networks:
+      - app-net
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_passkeys
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: passkeys
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-net
+ 
+
+volumes:
+  postgres_data:
+
+networks:
+  app-net:
