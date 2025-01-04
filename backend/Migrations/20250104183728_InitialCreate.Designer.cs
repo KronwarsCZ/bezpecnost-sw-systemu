@@ -12,7 +12,7 @@ using backend.database;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250104182505_InitialCreate")]
+    [Migration("20250104183728_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -35,7 +35,7 @@ namespace backend.Migrations
 
                     b.Property<byte[]>("CredentialId")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<byte[]>("PublicKey")
                         .IsRequired()

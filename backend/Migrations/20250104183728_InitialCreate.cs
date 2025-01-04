@@ -29,7 +29,7 @@ namespace backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CredentialId = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    CredentialId = table.Column<byte[]>(type: "bytea", nullable: false),
                     PublicKey = table.Column<byte[]>(type: "bytea", nullable: false),
                     SignCounter = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),

@@ -9,6 +9,6 @@ public sealed partial class AppDbContext
     private void ConfigureCredentials(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Credential>().Property(c => c.Id).ValueGeneratedNever();
-        modelBuilder.Entity<Credential>().Property(c => c.CredentialId).HasColumnType("varbinary(max)");
+        modelBuilder.Entity<Credential>().Property(c => c.CredentialId).HasColumnType("bytea");
     }
 }

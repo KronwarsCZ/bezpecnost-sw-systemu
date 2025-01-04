@@ -32,7 +32,7 @@ namespace backend.Migrations
 
                     b.Property<byte[]>("CredentialId")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<byte[]>("PublicKey")
                         .IsRequired()
