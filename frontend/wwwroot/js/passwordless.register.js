@@ -1,4 +1,4 @@
-async function handleRegisterSubmit(username, supersecret) {
+async function handleRegisterSubmit(username, supersecret, authenticator_attachment) {
     if (username === "") {
         console.log("Username empty")
     }
@@ -6,7 +6,7 @@ async function handleRegisterSubmit(username, supersecret) {
     // possible values: none, direct, indirect
     let attestation_type = "none";
     // possible values: <empty>, platform, cross-platform
-    let authenticator_attachment = "";
+    //let authenticator_attachment = "";
 
     // possible values: preferred, required, discouraged
     let user_verification = "preferred";
@@ -30,8 +30,9 @@ async function handleRegisterSubmit(username, supersecret) {
         makeCredentialOptions = await fetchMakeCredentialOptions(data);
     } catch (e) {
         console.error(e);
-        let msg = "Something wen't really wrong";
+        let msg = e.message;
         showErrorAlert(msg);
+        return;
     }
 
     console.log("Credential Options Object", makeCredentialOptions);
@@ -91,10 +92,13 @@ async function fetchMakeCredentialOptions(formData) {
             'Accept': 'application/x-www-form-urlencoded'
         }
     });
-
-    let data = await response.json();
-
-    return data;
+    
+    if (!response.ok) {
+        let err = await response.json();
+        throw new Error(err.message);
+    }
+    
+    return await response.json();
 }
 
 
@@ -135,7 +139,9 @@ async function registerNewCredential(newCredential) {
     }
 
     // show success 
-    alert("Registration successful!")
+    alert("Registration successful!");
+
+    window.location.href = '/passwordless-login';
 }
 
 async function registerCredentialWithServer(formData) {

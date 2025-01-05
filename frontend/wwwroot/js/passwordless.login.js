@@ -110,6 +110,7 @@ async function verifyAssertionWithServer(assertedCredential) {
 
     localStorage.setItem("login_token", response.token);
     // show success message
-    alert("Logged in!")
-    
+    alert("Logged in!");
+
+    window.location.href = '/secret';
 }

@@ -2,8 +2,8 @@ async function getSecret() {
     let username = localStorage.getItem("login_username");
     let token = localStorage.getItem("login_token");
     
-    if (token === "") {
-        console.log("token empty");
+    if (token === "" || token === null) {
+        alert("You are not logged in!");
     }
     
     await fetchSecret(username, token)

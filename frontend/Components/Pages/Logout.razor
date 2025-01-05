@@ -1,0 +1,14 @@
+@page "/logout"
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Show me my secret!</PageTitle>
+<script src="js/logout.js"></script>
+
+<button class="btn btn-primary" @onclick="DoLogout">Click me</button>
+
+@code {
+    private async Task DoLogout()
+    {
+        await JSRuntime.InvokeVoidAsync("logout");
+    }
+}
