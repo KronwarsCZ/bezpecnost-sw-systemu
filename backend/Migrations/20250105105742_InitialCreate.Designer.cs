@@ -12,7 +12,7 @@ using backend.database;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250105105151_InitialCreate")]
+    [Migration("20250105105742_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -31,7 +31,7 @@ namespace backend.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<byte[]>("CredentialId")
                         .IsRequired()
@@ -45,7 +45,7 @@ namespace backend.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("UpdatedAtUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");

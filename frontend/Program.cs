@@ -133,11 +133,6 @@ public class Program
             app.UseDeveloperExceptionPage();
         }
         
-        if (!app.Environment.IsDevelopment())
-        {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        }
-        
         app.UseHttpsRedirection();
         
         // Set up custom content types - associating file extension to MIME type
