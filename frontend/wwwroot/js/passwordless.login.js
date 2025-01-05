@@ -18,10 +18,18 @@ async function handleSignInSubmit(username) {
                 'Accept': 'application/x-www-form-urlencoded'
             }
         });
-
+        
+        if (!res.ok) {
+            let err = await res.text();
+            throw new Error(err);
+        }
+        
         makeAssertionOptions = await res.json();
     } catch (e) {
-        showErrorAlert("Request to server failed", e);
+        console.error(e);
+        let msg = e.toString();
+        showErrorAlert(msg);
+        return;
     }
 
     console.log("Assertion Options Object", makeAssertionOptions);
